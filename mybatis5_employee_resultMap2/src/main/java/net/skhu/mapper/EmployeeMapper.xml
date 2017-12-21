@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.skhu.mapper.EmployeeMapper">
+<cache flushInterval="10000"/>
+	<select id="findOne" resultType="Employee">
+		SELECT * FROM EMPLOYEE WHERE id =#{id}
+	</select>
+
+	<select id="findAll" resultType="Employee">
+		SELECT e.*, d.name as departmentName, NOW() time
+		from employee e LEFT JOIN department d on e.departmentId = d.id
+	</select>
+
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT Employee (id, name, departmentId)
+		VALUES(#{id},#{name},#{departmentId})
+
+	</insert>
+
+	<update id="update">
+		UPDATE Employee SET
+		id =#{id},
+		name=#{name},
+		departmentId=#{departmentId}
+		WHERE id =#{id}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM EMPLOYEE WHERE id =#{id}
+	</delete>
+</mapper>
