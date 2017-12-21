@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.skhu.mapper.ArticleMapper">
+  <cache flushInterval="10000" />
+  
+  <select id="findOne" resultType="Article">
+    SELECT * FROM Article WHERE id = #{id}
+  </select>
+  
+   
+
+
+
+  <select id="findAll" resultType="Article">
+    SELECT * FROM  Article
+  </select>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    INSERT Student (boardId, no, userId,writeTime, title, body)
+    VALUES (#{boardId}, #{no}, #{userId}, #{writeTime}, #{title},#{body})
+  </insert>
+
+  <update id="update">
+    UPDATE Article SET 
+      boardId = #{boardId}, 
+      name = #{name}, 
+      title=#{title}
+    WHERE id = #{id}
+  </update>
+
+  <delete id="delete">
+    DELETE FROM Article WHERE id = #{id}
+  </delete>
+
+</mapper>
+
