@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.skhu.mapper.DistrictMapper">
+
+	<select id="findAll" resultType="District">
+		SELECT * FROM District
+	</select>
+
+
+
+
+<select id="findAllWithCities" resultMap="resultMap1">
+		Select d.*, c.id , e.name, e.population from Department d LEFT JOIN
+		City c On d.id= c.districtId
+	</select>
+
+	<resultMap id="resultMap1" type="District">
+		<id property="id" column="id" />
+		<result property="districtName" column="distirctName" />
+		<collection property="city" ofType="City">
+			<id property="id" column="Id" />
+			<result property="name"  column="districtId" />
+			<result property="population" column="population" />
+		</collection>
+	</resultMap>
+
+</mapper>
+

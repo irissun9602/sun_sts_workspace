@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.skhu.mapper.CityMapper">
+
+<select id="findAllOrderBy" resultType="City">
+		Select c.*, d.districtName
+   	from City c LEFT JOIN District d On c.districtId= d.id
+		ORDER
+		BY ${order}
+
+	</select>
+  <select id="findOne" resultType="City">
+    SELECT * FROM City WHERE id = #{id}
+  </select>
+  
+   <select id="findByDistrictId" resultType="City">
+   	Select * from City where districtId=#{districtId}
+   </select>
+
+
+
+  <select id="findAll" resultType="City">
+   	Select c.*, d.districtName
+   	from City c LEFT JOIN District d On c.districtId= d.id
+   </select>
+
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    INSERT City (districtId, name, population)
+    VALUES (#{districtId}, #{name}, #{population})
+  </insert>
+
+  <update id="update">
+    UPDATE City
+		<set>
+			<if test="distictId != null">distictId = #{distictId},</if>
+			<if test="population != null">population = #{population},</if>
+			<if test="name != null">name = #{name},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+  <delete id="delete">
+    DELETE FROM City WHERE id = #{id}
+  </delete>
+
+
+</mapper>
+
